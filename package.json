@@ -1,0 +1,26 @@
+{
+  "name": "juliarogers_inf653vd_finalproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliaRogers13/JuliaRogers_INF653VD_FinalProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuliaRogers13/JuliaRogers_INF653VD_FinalProject/issues"
+  },
+  "homepage": "https://github.com/JuliaRogers13/JuliaRogers_INF653VD_FinalProject#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.2"
+  }
+}
