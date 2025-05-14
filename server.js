@@ -36,11 +36,12 @@ connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-// Catch-all for unmatched routes
-app.all('*', (req, res) => {
-  if (req.accepts('html')) {
+// Catch-all route for 404s at the very end
+app.use((req, res) => {
+  const accept = req.accepts(['html', 'json']);
+  if (accept === 'html') {
     res.status(404).send('<h1>404 Not Found</h1>');
-  } else if (req.accepts('json')) {
+  } else if (accept === 'json') {
     res.status(404).json({ error: '404 Not Found' });
   } else {
     res.status(404).type('txt').send('404 Not Found');
