@@ -4,6 +4,7 @@ const statesController = require('../controllers/statesController');
 
 // GET all states
 router.get('/', statesController.getAllStates);
+router.get('/:state', statesController.getState);
 
 // GET a random fun fact
 router.get('/:state/funfact', statesController.getRandomFunFact);

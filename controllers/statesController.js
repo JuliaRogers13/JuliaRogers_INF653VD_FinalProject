@@ -3,6 +3,19 @@ const State = require('../models/State');
 
 // GET all states from static JSON
 const getAllStates = (req, res) => {
+  const contigParam = req.query.contig;
+
+  if (contigParam === 'true') {
+    const filtered = statesData.filter(state => state.code !== 'AK' && state.code !== 'HI');
+    return res.json(filtered);
+  }
+
+  if (contigParam === 'false') {
+    const filtered = statesData.filter(state => state.code === 'AK' || state.code === 'HI');
+    return res.json(filtered);
+  }
+
+  // Default: return all
   res.json(statesData);
 };
 
@@ -147,6 +160,33 @@ const getStateAdmission = (req, res) => {
   res.json({ state: state.state, admitted: state.admission_date });
 };
 
+const getState = async (req, res) => {
+  const stateCode = req.params.state.toUpperCase();
+
+  // Find static data from JSON
+  const state = statesData.find(st => st.code === stateCode);
+  if (!state) {
+    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
+  }
+
+  // Clone static data to a new object
+  const stateWithFunFacts = { ...state };
+
+  try {
+    // Check for fun facts in MongoDB
+    const mongoState = await State.findOne({ stateCode });
+    if (mongoState && mongoState.funfacts && mongoState.funfacts.length > 0) {
+      stateWithFunFacts.funfacts = mongoState.funfacts;
+    }
+
+    res.json(stateWithFunFacts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
 module.exports = {
   getAllStates,
   getRandomFunFact,
@@ -156,5 +196,6 @@ module.exports = {
   getStateCapital,
   getStateNickname,
   getStatePopulation,
-  getStateAdmission
+  getStateAdmission,
+  getState
 };
