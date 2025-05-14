@@ -14,7 +14,7 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the States API! Try visiting /states or /states/:state for more.');
+  res.send('Welcome to Julia Rogers States API for Back End Development! Try visiting /states or /states/:state for more.');
 });
 
 // Routes
