@@ -35,27 +35,3 @@ app.use('/states', require('./routes/statesRoutes'));
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
-
-// Catch-all for unknown routes
-app.use((req, res) => {
-  const accept = req.accepts(['html', 'json']);
-  if (accept === 'html') {
-    res.status(404).send(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>404 Not Found</title>
-      </head>
-      <body>
-        <h1>404 Not Found</h1>
-        <p>The page you are looking for does not exist.</p>
-      </body>
-      </html>
-    `);
-  } else if (accept === 'json') {
-    res.status(404).json({ error: '404 Not Found' });
-  } else {
-    res.status(404).type('txt').send('404 Not Found');
-  }
-});
