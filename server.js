@@ -35,3 +35,14 @@ app.use('/states', require('./routes/statesRoutes'));
 connectDB().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+
+// Catch-all for unmatched routes
+app.all('*', (req, res) => {
+  if (req.accepts('html')) {
+    res.status(404).send('<h1>404 Not Found</h1>');
+  } else if (req.accepts('json')) {
+    res.status(404).json({ error: '404 Not Found' });
+  } else {
+    res.status(404).type('txt').send('404 Not Found');
+  }
+});
