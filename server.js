@@ -14,7 +14,18 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Julia Rogers States API for Back End Development! Try visiting /states or /states/:state for more.');
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>States API</title>
+      </head>
+      <body>
+        <h1>Welcome to the States API by Julia Rogers for Back End Web Development!</h1>
+        <p>Try visiting <code>/states</code> or <code>/states/:state</code> for more info.</p>
+      </body>
+    </html>
+  `);
 });
 
 // Routes
