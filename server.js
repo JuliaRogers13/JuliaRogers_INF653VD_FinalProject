@@ -13,6 +13,10 @@ app.get('/test', (req, res) => {
   res.send('Direct server route works!');
 });
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the States API! Try visiting /states or /states/:state for more.');
+});
+
 // Routes
 app.use('/states', require('./routes/statesRoutes'));
 
